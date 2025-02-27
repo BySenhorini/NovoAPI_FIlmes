@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "H5Nf/f/wyjWReaKfC9icuxhRa/CKZHwflgpZWsUww0M=",
+  "Source": "api_filmes_senai1",
+  "BasePath": "_content/api_filmes_senai1",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
