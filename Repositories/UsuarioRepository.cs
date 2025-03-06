@@ -2,31 +2,35 @@
 using api_filmes_senai1.Domains;
 using api_filmes_senai1.interfaces;
 using api_filmes_senai1.Utils;
+using Microsoft.EntityFrameworkCore;
 
-namespace api_filmes_senai1.Repositories
+namespace API_Filmes_SENAI.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly Filmes_Context _context;
 
-
-        public UsuarioRepository(Filmes_Context context)
+        public UsuarioRepository(Filmes_Context Context)
         {
-            _context = context;
+            _context = Context;
         }
-
 
         public Usuario BuscarPorEmailESenha(string email, string senha)
         {
-            try
-            {
 
-            }
-            catch (Exception)
-            {
+            Usuario usuarioBuscado = _context.Usuario.FirstOrDefault(u => u.Email == email)!;
 
-                throw;
+            if (usuarioBuscado != null)
+            {
+                bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senha!);
+
+                if (confere)
+                {
+                    return usuarioBuscado;
+                }
             }
+            return null!;
+
         }
 
         public Usuario BuscarPorId(Guid id)
@@ -40,14 +44,14 @@ namespace api_filmes_senai1.Repositories
                     return usuarioBuscado;
                 }
                 return null!;
+
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
-
-
 
         public void Cadastrar(Usuario novoUsuario)
         {
@@ -61,8 +65,10 @@ namespace api_filmes_senai1.Repositories
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
     }
 }
+

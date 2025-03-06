@@ -5,7 +5,7 @@
 namespace api_filmes_senai1.Migrations
 {
     /// <inheritdoc />
-    public partial class Db_Filmes_V2 : Migration
+    public partial class Db_Filmes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

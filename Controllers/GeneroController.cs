@@ -42,9 +42,12 @@ namespace api_filmes_senai1.Controllers
             {
                 return BadRequest(e.Message);
             }
-
-          
         }
+        /// <summary>
+        /// Endpoint para buscar um Gênero pelo seu Id
+        /// </summary>
+        /// <param name="id">Id do GêneroBuscado</param>
+        /// <returns>Gênero Buscado</returns>
         [HttpGet("BuscarPorId/{id}")]
         public IActionResult getById(Guid id)
         {

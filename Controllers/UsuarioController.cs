@@ -1,12 +1,106 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using api_filmes_senai1.Domains;
+using api_filmes_senai1.interfaces;
+using api_filmes_senai1.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
-namespace api_filmes_senai1.Controllers
+
+namespace API_Filmes_SENAI.Controllers
 {
-    public class HomeController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Produces("application/json")]
+    public class UsuarioController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IUsuarioRepository _usuarioRepository;
+
+        public UsuarioController(IUsuarioRepository usuarioRepository)
         {
-            return View();
+            _usuarioRepository = usuarioRepository;
+        }
+
+        [HttpPost]
+        public IActionResult Post(Usuario usuario)
+        {
+            try
+            {
+                _usuarioRepository.Cadastrar(usuario);
+
+                return StatusCode(201, usuario);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("BuscarPorEmailESenha/{email}/{senha}")]
+        public IActionResult GetByEmailAndPassword(string email, string senha)
+        {
+            try
+            {
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
+                return Ok(usuarioBuscado);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("BuscarPorId/{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorId(id);
+                return Ok(usuarioBuscado);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+            //BUscar por id
+            [HttpGet("{id}")]
+            public IActionResult GetByid(Guid id)
+            {
+                try
+                {
+                    Usuario usuario = _usuarioRepository.BuscarPorId(id);
+                    if (usuario != null)
+                    {
+                        return Ok(usuario);
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+
+                    return BadRequest(e.Message);
+                }
+            }
+            
+            [HttpGet("BuscarPorEmailESenha")]
+            public IActionResult GetByEmailAndSenha(string email, string senha)
+            {
+                try
+                {
+                    Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
+                    if (usuarioBuscado != null)
+                    {
+                        return Ok(usuarioBuscado);
+                    }
+                    return null;
+                }
+                catch (Exception e )
+                {
+
+                    return BadRequest(e.Message);
+                }
+            }
         }
     }
-}
+
+

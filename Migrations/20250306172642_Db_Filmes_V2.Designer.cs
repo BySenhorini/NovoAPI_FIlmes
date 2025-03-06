@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api_filmes_senai1.Migrations
 {
     [DbContext(typeof(Filmes_Context))]
-    [Migration("20250227172133_Db_Filmes_V2")]
-    partial class Db_Filmes_V2
+    [Migration("20250306172642_Db_Filmes")]
+    partial class Db_Filmes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

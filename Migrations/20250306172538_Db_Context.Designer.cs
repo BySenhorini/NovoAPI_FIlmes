@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api_filmes_senai1.Migrations
 {
     [DbContext(typeof(Filmes_Context))]
-    [Migration("20250218185557_Db_Filmes")]
-    partial class Db_Filmes
+    [Migration("20250306172538_Db_Context")]
+    partial class Db_Context
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,33 @@ namespace api_filmes_senai1.Migrations
                     b.HasKey("IdGenero");
 
                     b.ToTable("Genero");
+                });
+
+            modelBuilder.Entity("api_filmes_senai1.Domains.Usuario", b =>
+                {
+                    b.Property<Guid>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("VARCHAR(60)");
+
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("api_filmes_senai1.Domains.Filme", b =>
