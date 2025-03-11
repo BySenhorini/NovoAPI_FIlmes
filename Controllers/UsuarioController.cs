@@ -33,19 +33,6 @@ namespace API_Filmes_SENAI.Controllers
             }
         }
 
-        [HttpGet("BuscarPorEmailESenha/{email}/{senha}")]
-        public IActionResult GetByEmailAndPassword(string email, string senha)
-        {
-            try
-            {
-                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
-                return Ok(usuarioBuscado);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
 
         [HttpGet("BuscarPorId/{id}")]
         public IActionResult GetById(Guid id)
@@ -62,45 +49,26 @@ namespace API_Filmes_SENAI.Controllers
             }
         }
 
-            //BUscar por id
-            [HttpGet("{id}")]
-            public IActionResult GetByid(Guid id)
-            {
-                try
-                {
-                    Usuario usuario = _usuarioRepository.BuscarPorId(id);
-                    if (usuario != null)
-                    {
-                        return Ok(usuario);
-                    }
-                    return null;
-                }
-                catch (Exception e)
-                {
 
-                    return BadRequest(e.Message);
+        [HttpGet("BuscarPorEmailESenha")]
+        public IActionResult GetByEmailAndSenha(string email, string senha)
+        {
+            try
+            {
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
+                if (usuarioBuscado != null)
+                {
+                    return Ok(usuarioBuscado);
                 }
+                return null;
             }
-            
-            [HttpGet("BuscarPorEmailESenha")]
-            public IActionResult GetByEmailAndSenha(string email, string senha)
+            catch (Exception e)
             {
-                try
-                {
-                    Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(email, senha);
-                    if (usuarioBuscado != null)
-                    {
-                        return Ok(usuarioBuscado);
-                    }
-                    return null;
-                }
-                catch (Exception e )
-                {
 
-                    return BadRequest(e.Message);
-                }
+                return BadRequest(e.Message);
             }
         }
     }
+}
 
 

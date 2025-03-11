@@ -1,4 +1,5 @@
 using API_Filmes_SENAI.Context;
+using API_Filmes_SENAI.Repositories;
 using api_filmes_senai1.interfaces;
 using api_filmes_senai1.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<Filmes_Context>(options =>
 //Adicionar o repositorio e a interface ao container de injecao de dependencia
 builder.Services.AddScoped<IGeneroRepositoy, GeneroRepository>();
 builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 //Adicionar o servico de Controllers
 builder.Services.AddControllers();
@@ -45,9 +47,9 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.FromMinutes(5),
 
         //valida de onde está vindo
-        ValidIssuer = "api_filmes_senai",
+        ValidIssuer = "api_filmes_senai1",
 
-        ValidAudience = "api_filmes_senai"
+        ValidAudience = "api_filmes_senai1"
 
     };
 });
@@ -77,14 +79,45 @@ builder.Services.AddSwaggerGen(options =>
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+
+    //Usando a autenticaçao no Swagger
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Value: Bearer TokenJWT ",
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+
 });
-
-
-
-
-
-
-
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -100,14 +133,16 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty;
     });
 }
-
+app.UseCors("CorsPolicy");
 //Adicionar o mapeamento dos controllers.
 app.MapControllers();
 
-//Adicionar a autorização.
-app.UseAuthorization();
+
 
 //Adicionar a autenticação.
 app.UseAuthentication();
+
+//Adicionar a autorização.
+app.UseAuthorization();
 
 app.Run();

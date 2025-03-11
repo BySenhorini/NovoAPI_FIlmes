@@ -22,7 +22,6 @@ namespace api_filmes_senai1.Domains
         [Column(TypeName = "VARCHAR(60)")]
         [Required(ErrorMessage = "A senha e obrigatoria!")]
         [StringLength(60, MinimumLength = 6, ErrorMessage = "A senha deve conter no minimo 6 caracteres e no maximo 60")]
-
         public string? Senha { get; set; }
     }
 }

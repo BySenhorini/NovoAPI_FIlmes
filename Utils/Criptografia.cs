@@ -9,10 +9,7 @@
 
         public static bool CompararHash(string senhaInformada, string senhaBanco)
         {
-            return BCrypt.Net.BCrypt.Verify(senhaBanco, senhaInformada);
+            return BCrypt.Net.BCrypt.Verify(senhaInformada, senhaBanco);
         }
-        
-        
-
     }
 }

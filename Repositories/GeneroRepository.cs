@@ -7,8 +7,6 @@ namespace api_filmes_senai1.Repositories
     /// <summary>
     /// Classe que vai implementar a interface IGeneroRepository ou seja vamos implementar os metodos, toda a logica do metodos
     /// </summary>
-
-
     public class GeneroRepository : IGeneroRepositoy
     {
 
@@ -29,11 +27,6 @@ namespace api_filmes_senai1.Repositories
             _context = contexto;
 
         }       
-
-
-
-
-
 
         public void Atualizar(Guid id, Genero Genero)
         {

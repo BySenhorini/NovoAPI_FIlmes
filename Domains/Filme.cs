@@ -8,6 +8,7 @@ namespace api_filmes_senai1.Domains
     {
         [Key]
         public Guid IdFilme { get; set; }
+
         [Column(TypeName = "VARCHAR(50)")]
         [Required(ErrorMessage = "O titulo do filme e obrigatorio!")]
         public string? Titulo { get; set; }

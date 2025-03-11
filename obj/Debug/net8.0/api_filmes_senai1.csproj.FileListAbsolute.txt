@@ -672,3 +672,10 @@ C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\staticwebassets.upT
 C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\api_film.899DEC17.Up2Date
 C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\api_filmes_senai1.genruntimeconfig.cache
 C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\ref\api_filmes_senai1.dll
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\bin\Debug\net8.0\api_filmes_senai1.xml
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\api_filmes_senai1.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\56805860881\Desktop\NovoAPI_FIlmes\obj\Debug\net8.0\api_filmes_senai1.xml
